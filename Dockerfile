@@ -8,4 +8,6 @@ RUN cargo install trunk wasm-bindgen-cli
 
 RUN cargo install --path .
 
-CMD ["trunk", "serve", "--release"]
+EXPOSE 8080
+
+CMD ["trunk", "serve", "--release", "--address", "0.0.0.0"]
