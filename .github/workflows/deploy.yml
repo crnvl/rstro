@@ -1,10 +1,8 @@
 name: Docker Image
 
 on:
-  workflow_run:
-    workflows: ["Check Build"]
-    types:
-      - completed
+  push:
+    branches: [ "master" ]
 
 jobs:
   build:
