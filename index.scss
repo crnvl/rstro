@@ -2,8 +2,32 @@ html,
 body {
   height: max-content;
   margin: 0;
-  padding: 8px;
+  padding-left: 12px;
   background-color: #eef2ff;
+  color: #34345c;
 
   font-family: Arial, Helvetica, sans-serif;
+}
+
+#container {
+  background-color: #d6daf0;
+  max-width: fit-content;
+}
+
+#post-wrap {
+  display: flex;
+  justify-content: start;
+  align-items: start;
+}
+
+#post-left, #post-right {
+  flex: 1;
+}
+
+#post-right {
+  padding-left: 12px;
+}
+
+#post-img {
+  max-height: 200px;
 }
