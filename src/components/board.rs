@@ -1,5 +1,5 @@
 use reqwasm::http::Request;
-use yew::{function_component, html, use_state, Html, Properties};
+use yew::{function_component, html, use_state, Html, Properties, use_effect, use_effect_with_deps};
 
 use crate::{utils::models::Post, components::post::PostEmbed};
 
@@ -14,18 +14,20 @@ pub fn Board(props: &BoardProps) -> Html {
     let posts_clone = posts.clone();
 
     let board = props.board.clone();
-    wasm_bindgen_futures::spawn_local(async move {
-        let endpoint = format!("https://ping.qwq.sh/posts/{}", board);
-        let fetched_posts = Request::get(&endpoint)
-            .send()
-            .await
-            .unwrap()
-            .json::<Vec<Post>>()
-            .await
-            .unwrap();
-
-        posts.set(Some(fetched_posts));
-    });
+    use_effect_with_deps(move |_| {
+        wasm_bindgen_futures::spawn_local(async move {
+            let endpoint = format!("https://ping.qwq.sh/posts/{}", board);
+            let fetched_posts = Request::get(&endpoint)
+                .send()
+                .await
+                .unwrap()
+                .json::<Vec<Post>>()
+                .await
+                .unwrap();
+    
+            posts.set(Some(fetched_posts));
+        });
+    }, ());
 
     match posts_clone.as_ref() {
         Some(p) => {
