@@ -7,5 +7,5 @@ Ping is a barebones & anonymous chat platform as a web server built with SQLite 
 
 # Host it yourself with Docker
 ```bash
-docker run -d -p 80:8080 --name rstro qwqshq/rstro
+docker run -d -p 80:8080 --name rstro ghcr.io/angelsflyinhell/rstro
 ```
