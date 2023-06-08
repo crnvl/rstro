@@ -33,6 +33,7 @@ pub fn app() -> Html {
                 <a href="/new">{ "New Post" }</a>
                 <a href="https://github.com/angelsflyinhell/rstro">{ "rstro" }</a>
                 <a href="https://github.com/angelsflyinhell/ping">{ "ping" }</a>
+                <a>{ "Built with Rust, WASM and ❤️" }</a>
             </div>
             <div id="content"> 
                 <BrowserRouter>

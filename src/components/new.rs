@@ -64,17 +64,18 @@ pub fn NewPost() -> Html {
         <div id="container">
             <h1>{ "New Post" }</h1>
             <form onsubmit={onchange}>
-                <label for="board">{ "Board: " }</label>
+                <label for="board">{ "Board*: " }</label>
                 <input class="board" type="text" id="board" name="board" required={true} /><br/>
-                <label for="username">{ "Username: " }</label>
-                <input class="username" type="text" id="username" name="username" value="anonymous" /><br/>
-                <label for="content">{ "Content: " }</label>
+                <label for="username">{ "Username*: " }</label>
+                <input class="username" type="text" id="username" name="username" value="anonymous" required={true}/><br/>
+                <label for="content">{ "Content*: " }</label>
                 <textarea class="content" id="content" name="content" cols="50" required={true}></textarea><br/>
                 <label for="thumb_url">{ "Image URL: " }</label>
                 <input class="thumb_url" type="text" id="thumb_url" name="thumb_url" /><br/>
                 <label for="ref_id">{ "Reply to: " }</label>
                 { ref_id }<br/>
                 <button type="submit">{ "Submit" }</button>
+                <h6>{ "* Required" }</h6>
             </form>
         </div>
     }

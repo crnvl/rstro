@@ -23,7 +23,8 @@ pub fn Home() -> Html {
         <>
             <h1>{ "Welcome to ping!" }</h1>
             <p>{ "Ping is a barebones & anonymous social network as a web server built with Rust. You're currently using rstro as a client." }</p>
-            <p>{ "Right now, this client cannot be used to create posts, but you can take a look at other people's posts on the boards listed below!" }</p>
+            <p>{ "To create a new post, simply select 'New Post' in the navigation bar. If you want to create a new board, you can just write the name in the 'Board' field." }</p>
+            <p>{ "You can also follow me on Twitter if u want: " }<a href="https://twitter.com/angelsflyinhell">{ "Twitter" }</a></p>
             <h2>{ "Boards" }</h2>
             {
                 match boards_clone.as_ref() {
