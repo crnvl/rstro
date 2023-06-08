@@ -1,6 +1,6 @@
-use yew::{function_component, Html, html, Properties, use_effect_with_deps, use_state};
+use yew::{function_component, html, use_effect_with_deps, use_state, Html, Properties};
 
-use crate::{utils::models::Post, components::post::PostEmbed};
+use crate::{components::post::PostEmbed, utils::models::Post};
 
 #[derive(Properties, PartialEq)]
 pub struct PostPageProps {
@@ -11,6 +11,9 @@ pub struct PostPageProps {
 pub fn PostPage(props: &PostPageProps) -> Html {
     let post = use_state(|| None);
     let post_clone = post.clone();
+
+    let comments = use_state(|| None);
+    let comments_clone = comments.clone();
 
     let id = props.id.clone();
     use_effect_with_deps(
@@ -26,6 +29,17 @@ pub fn PostPage(props: &PostPageProps) -> Html {
                     .unwrap();
 
                 post.set(Some(fetched_post));
+
+                let endpoint = format!("https://ping.qwq.sh/post/{}/comments", id);
+                let fetched_comments = reqwasm::http::Request::get(&endpoint)
+                    .send()
+                    .await
+                    .unwrap()
+                    .json::<Vec<Post>>()
+                    .await
+                    .unwrap();
+
+                comments.set(Some(fetched_comments));
             });
         },
         (),
@@ -47,6 +61,40 @@ pub fn PostPage(props: &PostPageProps) -> Html {
                                 username={ p.username.clone() }
                                 ref_id={ p.ref_id.clone() }
                                 time={ p.time.clone() } />
+                                {
+                                    match comments_clone.as_ref() {
+                                        Some(c) => {
+                                            html! {
+                                                <>
+                                                    <hr/>
+                                                    <h2>{ "Comments" }</h2>
+                                                    {
+                                                        for c.iter().map(|c| {
+                                                            html! {
+                                                                <>
+                                                                    <PostEmbed id={ c.id.clone() }
+                                                                    board={ c.board.clone() }
+                                                                    thumb_url={ c.thumb_url.clone() }
+                                                                    content={ c.content.clone() }
+                                                                    username={ c.username.clone() }
+                                                                    ref_id={ c.ref_id.clone() }
+                                                                    time={ c.time.clone() } />
+                                                                </>
+                                                            }
+                                                        })
+                                                    }
+                                                </>
+                                            }
+                                        },
+                                        None => {
+                                            html! {
+                                                <>
+                                                    <p>{ "Loading..." }</p>
+                                                </>
+                                            }
+                                        }
+                                    }
+                                }
                             </>
                         }
                     },
