@@ -10,3 +10,11 @@ pub struct Post {
     pub ref_id: String,
     pub time: String,
 }
+
+#[derive(Serialize, Deserialize, Debug, Clone)]
+pub struct UserPost {
+    pub thumb_url: Option<String>,
+    pub content: String,
+    pub username: Option<String>,
+    pub ref_id: Option<String>,
+}
