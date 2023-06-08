@@ -26,6 +26,8 @@ pub fn Board(props: &BoardProps) -> Html {
                     .await
                     .unwrap();
 
+                let fetched_posts = fetched_posts.into_iter().rev().collect::<Vec<Post>>();
+
                 posts.set(Some(fetched_posts));
             });
         },

@@ -39,6 +39,8 @@ pub fn PostPage(props: &PostPageProps) -> Html {
                     .await
                     .unwrap();
 
+                let fetched_comments = fetched_comments.into_iter().rev().collect::<Vec<Post>>();
+
                 comments.set(Some(fetched_comments));
             });
         },
