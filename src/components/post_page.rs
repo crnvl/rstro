@@ -4,7 +4,7 @@ use crate::{utils::models::Post, components::post::PostEmbed};
 
 #[derive(Properties, PartialEq)]
 pub struct PostPageProps {
-    pub id: i64,
+    pub id: String,
 }
 
 #[function_component]
@@ -40,12 +40,12 @@ pub fn PostPage(props: &PostPageProps) -> Html {
                         html! {
                             <>
                                 <hr/>
-                                <PostEmbed id={ p.id }
+                                <PostEmbed id={ p.id.clone() }
                                 board={ p.board.clone() }
                                 thumb_url={ p.thumb_url.clone() }
                                 content={ p.content.clone() }
                                 username={ p.username.clone() }
-                                ref_id={ p.ref_id }
+                                ref_id={ p.ref_id.clone() }
                                 time={ p.time.clone() } />
                             </>
                         }

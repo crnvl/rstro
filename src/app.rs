@@ -10,7 +10,7 @@ enum Route {
     #[at("/b/:board")]
     Board { board: String },
     #[at("/p/:id")]
-    Post { id: i64 },
+    Post { id: String },
 }
 
 fn switch(routes: Route) -> Html {

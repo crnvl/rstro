@@ -2,12 +2,12 @@ use yew::{function_component, html, Html, Properties};
 
 #[derive(Properties, PartialEq)]
 pub struct PostProps {
-    pub id: i64,
+    pub id: String,
     pub board: String,
     pub thumb_url: String,
     pub content: String,
     pub username: String,
-    pub ref_id: i64,
+    pub ref_id: String,
     pub time: String,
 }
 
@@ -16,7 +16,7 @@ pub fn PostEmbed(post: &PostProps) -> Html {
     html! {
         <div id="container">
             <p><a href={format!("/p/{}", post.ref_id)}>{ 
-                if post.ref_id != 0 {
+                if post.ref_id != "0" {
                     format!(">>{}", post.ref_id)
                 } else {
                     "".to_string()

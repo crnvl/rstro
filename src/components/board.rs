@@ -41,12 +41,12 @@ pub fn Board(props: &BoardProps) -> Html {
                         html! {
                             <>
                                 <hr/>
-                                <PostEmbed id={ post.id }
+                                <PostEmbed id={ post.id.clone() }
                                 board={ post.board.clone() }
                                 thumb_url={ post.thumb_url.clone() }
                                 content={ post.content.clone() }
                                 username={ post.username.clone() }
-                                ref_id={ post.ref_id }
+                                ref_id={ post.ref_id.clone() }
                                 time={ post.time.clone() } />
                                 <a href={ format!("/p/{}", post.id) }>{ "> View thread" }</a>
                             </>
