@@ -17,12 +17,12 @@ pub fn PostEmbed(post: &PostProps) -> Html {
         <div id="container">
             <p><a href={format!("/p/{}", post.ref_id)}>{ 
                 if post.ref_id != "0" {
-                    format!(">>{}", post.ref_id)
+                    format!(">>#{}", post.ref_id)
                 } else {
                     "".to_string()
                 }
              }</a></p>
-            <p><b>{ format!("by {} | #{} | {}", post.username.clone(), post.id, post.time.clone()) }</b></p>   
+            <p><b>{ format!("by {} | #{} | {}", post.username.clone(), post.id, post.time.clone()) }</b></p> 
             <div id="post-wrap">
                 {
                     if post.thumb_url != "" {

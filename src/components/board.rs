@@ -48,7 +48,7 @@ pub fn Board(props: &BoardProps) -> Html {
                                 username={ post.username.clone() }
                                 ref_id={ post.ref_id.clone() }
                                 time={ post.time.clone() } />
-                                <a href={ format!("/p/{}", post.id) }>{ "> View thread" }</a>
+                                <h6><a href={ format!("/p/{}", post.id) }>{ "> View thread" }</a> { " | " } <a href={ format!("/new?id={}", post.id) }>{ "Reply" }</a></h6>
                             </>
                         })
                      }

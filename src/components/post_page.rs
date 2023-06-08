@@ -67,22 +67,27 @@ pub fn PostPage(props: &PostPageProps) -> Html {
                                             html! {
                                                 <>
                                                     <hr/>
-                                                    <h2>{ "Comments" }</h2>
-                                                    {
-                                                        for c.iter().map(|c| {
-                                                            html! {
-                                                                <>
-                                                                    <PostEmbed id={ c.id.clone() }
-                                                                    board={ c.board.clone() }
-                                                                    thumb_url={ c.thumb_url.clone() }
-                                                                    content={ c.content.clone() }
-                                                                    username={ c.username.clone() }
-                                                                    ref_id={ c.ref_id.clone() }
-                                                                    time={ c.time.clone() } />
-                                                                </>
-                                                            }
-                                                        })
-                                                    }
+                                                    <h2>{ "Comments | " }<a href={ format!("/new?id={}", p.id.clone()) }>{ "Reply" }</a></h2>
+                                                        {
+                                                            for c.iter().map(|c| {
+                                                                html! {
+                                                                    <>
+                                                                    <div id="comment-container">
+                                                                        <PostEmbed id={ c.id.clone() }
+                                                                        board={ c.board.clone() }
+                                                                        thumb_url={ c.thumb_url.clone() }
+                                                                        content={ c.content.clone() }
+                                                                        username={ c.username.clone() }
+                                                                        ref_id={ c.ref_id.clone() }
+                                                                        time={ c.time.clone() } />
+                                                                        <h6><a href={ format!("/p/{}", p.id.clone()) }>{ "> View thread" }</a> { " | " } <a href={ format!("/new?id={}", p.id.clone()) }>{ "Reply" }</a></h6>
+
+                                                                    </div>
+                                                                    <hr/>
+                                                                    </>
+                                                                }
+                                                            })
+                                                        }
                                                 </>
                                             }
                                         },
