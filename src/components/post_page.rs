@@ -82,7 +82,7 @@ pub fn PostPage(props: &PostPageProps) -> Html {
                                                                         username={ c.username.clone() }
                                                                         ref_id={ c.ref_id.clone() }
                                                                         time={ c.time.clone() } />
-                                                                        <h6><a href={ format!("/p/{}", p.id.clone()) }>{ "> View thread" }</a> { " | " } <a href={ format!("/new?id={}", p.id.clone()) }>{ "Reply" }</a></h6>
+                                                                        <h6><a href={ format!("/p/{}", c.id.clone()) }>{ "> View thread" }</a> { " | " } <a href={ format!("/new?id={}", c.id.clone()) }>{ "Reply" }</a></h6>
 
                                                                     </div>
                                                                     <hr/>
