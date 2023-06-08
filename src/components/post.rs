@@ -15,7 +15,7 @@ pub struct PostProps {
 pub fn PostEmbed(post: &PostProps) -> Html {
     html! {
         <div id="container">
-            <p><a href={format!("/post/{}", post.ref_id)}>{ 
+            <p><a href={format!("/p/{}", post.ref_id)}>{ 
                 if post.ref_id != 0 {
                     format!(">>{}", post.ref_id)
                 } else {

@@ -1,7 +1,7 @@
 use reqwasm::http::Request;
-use yew::{function_component, html, use_state, Html, Properties, use_effect_with_deps};
+use yew::{function_component, html, use_effect_with_deps, use_state, Html, Properties};
 
-use crate::{utils::models::Post, components::post::PostEmbed};
+use crate::{components::post::PostEmbed, utils::models::Post};
 
 #[derive(Properties, PartialEq)]
 pub struct BoardProps {
@@ -14,20 +14,23 @@ pub fn Board(props: &BoardProps) -> Html {
     let posts_clone = posts.clone();
 
     let board = props.board.clone();
-    use_effect_with_deps(move |_| {
-        wasm_bindgen_futures::spawn_local(async move {
-            let endpoint = format!("https://ping.qwq.sh/posts/{}", board);
-            let fetched_posts = Request::get(&endpoint)
-                .send()
-                .await
-                .unwrap()
-                .json::<Vec<Post>>()
-                .await
-                .unwrap();
-    
-            posts.set(Some(fetched_posts));
-        });
-    }, ());
+    use_effect_with_deps(
+        move |_| {
+            wasm_bindgen_futures::spawn_local(async move {
+                let endpoint = format!("https://ping.qwq.sh/posts/{}", board);
+                let fetched_posts = Request::get(&endpoint)
+                    .send()
+                    .await
+                    .unwrap()
+                    .json::<Vec<Post>>()
+                    .await
+                    .unwrap();
+
+                posts.set(Some(fetched_posts));
+            });
+        },
+        (),
+    );
 
     match posts_clone.as_ref() {
         Some(p) => {
@@ -36,18 +39,21 @@ pub fn Board(props: &BoardProps) -> Html {
                     <h1>{ format!("/b/{}", props.board) }</h1>
                     { for p.iter().map(|post|
                         html! {
-                            <PostEmbed id={ post.id }
-                            board={ post.board.clone() }
-                            thumb_url={ post.thumb_url.clone() }
-                            content={ post.content.clone() }
-                            username={ post.username.clone() }
-                            ref_id={ post.ref_id }
-                            time={ post.time.clone() } />
+                            <>
+                                <hr/>
+                                <PostEmbed id={ post.id }
+                                board={ post.board.clone() }
+                                thumb_url={ post.thumb_url.clone() }
+                                content={ post.content.clone() }
+                                username={ post.username.clone() }
+                                ref_id={ post.ref_id }
+                                time={ post.time.clone() } />
+                            </>
                         })
                      }
                 </>
             }
-        },
+        }
         None => {
             html! {
                 <>
