@@ -29,6 +29,7 @@ pub fn PostEmbed(post: &PostProps) -> Html {
                         html! {
                             <div id="post-left">
                                 <img id="post-img" src={ post.thumb_url.clone() } />
+                                <h6><a href={ post.thumb_url.clone() } target="_blank" rel="noopener noreferrer">{"View full image"}</a></h6>
                             </div>
                         }
                     } else {
