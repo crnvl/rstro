@@ -18,3 +18,9 @@ pub struct UserPost {
     pub username: Option<String>,
     pub ref_id: Option<String>,
 }
+
+#[derive(Serialize, Deserialize, Debug, Clone)]
+pub struct Board {
+    pub name: String,
+    pub size: i64,
+}

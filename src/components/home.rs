@@ -1,4 +1,5 @@
 use yew::{Html, function_component, html, use_state, use_effect_with_deps};
+use crate::utils::models::Board;
 
 #[function_component]
 pub fn Home() -> Html {
@@ -11,9 +12,13 @@ pub fn Home() -> Html {
                 .send()
                 .await
                 .unwrap()
-                .json::<Vec<String>>()
+                .json::<Vec<Board>>()
                 .await
                 .unwrap();
+
+            // sort boards by size 
+            let mut fetched_boards = fetched_boards;
+            fetched_boards.sort_by(|a, b| b.size.cmp(&a.size));
 
             boards.set(Some(fetched_boards));
         });
@@ -34,7 +39,7 @@ pub fn Home() -> Html {
                                 { for b.iter().map(|board|
                                     html! {
                                         <>
-                                            <a href={ format!("/b/{}", board) }><b>{ format!("/b/{}", board) }</b></a><br />
+                                            <a href={ format!("/b/{}", board.name) }><b>{ format!("/b/{}", board.name) }</b></a>{ format!(" ({} posts)", board.size) }<br />
                                         </>
                                     })
                                 }
