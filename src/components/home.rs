@@ -1,5 +1,5 @@
 use yew::{Html, function_component, html, use_state, use_effect_with_deps};
-use crate::utils::{models::Board, meta::set_meta_tags};
+use crate::utils::{models::Board};
 
 #[function_component]
 pub fn Home() -> Html {
@@ -22,9 +22,6 @@ pub fn Home() -> Html {
             boards.set(Some(fetched_boards));
         });
     }, ());
-
-    let document = web_sys::window().unwrap().document().unwrap();
-    set_meta_tags(document, "rstro - the social network", "Chat anonymously with anyone on the internet. Built with Rust and WASM.", "https://d7hftxdivxxvm.cloudfront.net/?quality=80&resize_to=width&src=https%3A%2F%2Fartsy-media-uploads.s3.amazonaws.com%2F2RNK1P0BYVrSCZEy_Sd1Ew%252F3417757448_4a6bdf36ce_o.jpg");
 
     html! {
         <>
